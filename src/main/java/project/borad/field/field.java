@@ -1,4 +1,6 @@
-package borad.field;
+package project.borad.field;
+
+import project.color;
 
 import java.util.List;
 
@@ -91,4 +93,5 @@ public interface field {
         return field.exists(f2, f1.getNeighbors());
     }
 
+    color setColor(color col);
 }

@@ -1,4 +1,6 @@
-package borad.field;
+package project.borad.field;
+
+import project.color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,19 +8,20 @@ import java.util.List;
 /**
  * this is one borad.field.field of the borad.board
  */
-public class gameField implements field {
+public class defaultBoardField implements field {
 
     protected int column;
     protected int row;
     protected boolean edge;
     protected List<field> neighbors;
+    protected color playersColor;
 
     /**
      * short version of default constructor
      * @param column of this borad.field.field
      * @param row of this borad.field.field
      */
-    public gameField (int column, int row)
+    public defaultBoardField(int column, int row)
     {
         this(column, row, false);
     }
@@ -29,11 +32,12 @@ public class gameField implements field {
      * @param row of this borad.field.field
      * @param edge is this borad.field.field an edge
      */
-    public gameField (int column, int row, boolean edge)
+    public defaultBoardField(int column, int row, boolean edge)
     {
         setColumn(column);
         setRow(row);
         setEdge(edge);
+        playersColor = color.NULL;
     }
 
     /**
@@ -136,5 +140,10 @@ public class gameField implements field {
     @Override
     public boolean isNeighbor(field someField) {
         return field.areNeighbors(this, someField);
+    }
+
+    @Override
+    public color setColor(color col) {
+        return null;
     }
 }
