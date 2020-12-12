@@ -1,6 +1,6 @@
 package client;
 
-import game.color;
+import game.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;

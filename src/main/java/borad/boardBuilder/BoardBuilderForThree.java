@@ -2,7 +2,7 @@ package borad.boardBuilder;
 
 import game.color;
 
-public class BoardBuilderForThree extends boardBuilder {
+public class boardBuilderForThree extends boardBuilder {
     /**
      * This method sets all pawns
      */

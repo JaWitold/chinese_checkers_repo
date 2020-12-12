@@ -1,6 +1,6 @@
 package server;
 
-import game.color;
+import game.*;
 
 import java.net.ServerSocket;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 public class server {
     public static final List<player> players = new ArrayList<>();
     public static final List<color> colorList = new ArrayList<>();
+    private static game serverGame;
 
     public static void main(String[] args) throws Exception {
 
@@ -46,6 +47,7 @@ public class server {
 
             }
             System.out.println(players.size());
+            serverGame = new game(players);
         }
     }
 }

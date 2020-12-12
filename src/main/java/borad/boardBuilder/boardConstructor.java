@@ -28,7 +28,8 @@ public class boardConstructor {
      */
     public void constructBoard() {
         builder.buildNewBoard();
-        builder.setPawns();
-        builder.setTriangles();
+        //TODO: uncoment this
+        //builder.setPawns();
+        //builder.setTriangles();
     }
 }

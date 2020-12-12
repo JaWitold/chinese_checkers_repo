@@ -1,6 +1,6 @@
 package client;
 
-import game.color;
+import game.*;
 
 public class player {
     private color myColor;
