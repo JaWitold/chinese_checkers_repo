@@ -2,6 +2,8 @@ package game;
 
 import borad.field.field;
 
+import java.util.List;
+
 public class pawn {
     private field myField;
     private color myColor;
@@ -39,5 +41,25 @@ public class pawn {
      */
     public void setColor(color myColor) {
         this.myColor = myColor;
+    }
+
+    public static boolean exists(pawn pawnToCheck, List<pawn> pawnsList) {
+        boolean exists = false;
+
+        for(pawn cPawn: pawnsList) {
+            if(cPawn.getColumn() == pawnToCheck.getColumn() && cPawn.getRow() == pawnToCheck.getRow()) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
+    }
+
+    public int getColumn() {
+        return myField.getColumn();
+    }
+
+    public int getRow() {
+        return myField.getRow();
     }
 }

@@ -58,4 +58,8 @@ public class player implements Runnable {
     public void sendMessage(String msg) {
         socketOutput.println(msg);
     }
+
+    public Scanner getSocketInput() {
+        return socketInput;
+    }
 }

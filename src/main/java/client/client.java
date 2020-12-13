@@ -19,6 +19,7 @@ public class client {
     public static void main(String[] args) {
 
         client cli = new client();
+        System.out.println("Running client");
         cli.run();
 
     }

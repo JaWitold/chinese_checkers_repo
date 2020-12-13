@@ -7,6 +7,9 @@ import borad.field.field;
 import game.color;
 import game.pawn;
 
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 /**
  * abstract board builder
  */
@@ -87,7 +90,9 @@ public abstract class boardBuilder {
     }
 
     public void setPlayersPawns(final field startingField, final color col, int depth) {
-        startingField.setPawn(new pawn(col, startingField));
+        pawn tmp = new pawn(col, startingField);
+        startingField.setPawn(tmp);
+        gameBoard.addPawn(tmp);
         //System.out.println(startingField.getPawn().getColor());
         if(depth > 1) {
             depth--;
