@@ -12,7 +12,7 @@ public interface board {
     /**
      * @return list of field
      */
-    List<field> getField();
+    List<field> getFields();
     /**
      * @return list of pawns
      */

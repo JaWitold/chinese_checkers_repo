@@ -1,5 +1,7 @@
 package client;
 
+import borad.board;
+import borad.boardBuilder.*;
 import game.*;
 
 import java.io.IOException;
@@ -28,6 +30,9 @@ public class client {
             socketOutput = new PrintWriter(socket.getOutputStream(), true);
 
             myPlayer = new player(color.valueOf(socketInput.nextLine()), this);
+            int mode = socketInput.nextInt();
+            System.out.println(mode);
+            myPlayer.setBoard(setUpBoard(mode));
             while (true) {}
 
         } catch (IOException e) {
@@ -35,7 +40,7 @@ public class client {
         } finally {
             try {
                 if(socket == null) {
-                    throw new ServerException("Nie udało sie polaczyc z serwerem");
+                    throw new ServerException("Cannot connect to the server");
                 }
                 socket.close();
                 socketInput.close();
@@ -43,5 +48,22 @@ public class client {
                 e.printStackTrace();
             }
         }
+    }
+
+    private board setUpBoard(int mode) {
+        boardConstructor constructor = new boardConstructor();
+        constructor.setBoardBuilder(chooseBoardBuilder(mode));
+        constructor.constructBoard();
+        return constructor.getBoard();
+    }
+
+    private boardBuilder chooseBoardBuilder(int mode) {
+        boardBuilder tmp = switch (mode) {
+            case 6 -> new boardBuilderForSix();
+            case 4 -> new boardBuilderForFour();
+            case 3 -> new boardBuilderForThree();
+            default -> new boardBuilderForTwo();
+        };
+        return tmp;
     }
 }

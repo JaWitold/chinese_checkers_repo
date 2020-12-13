@@ -1,6 +1,7 @@
 package borad.field;
 
 import game.color;
+import game.pawn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class defaultBoardField implements field {
     protected boolean edge;
     protected List<field> neighbors;
     protected color playersColor;
+    protected pawn playersPawn;
 
     /**
      * short version of default constructor
@@ -38,6 +40,8 @@ public class defaultBoardField implements field {
         setRow(row);
         setEdge(edge);
         playersColor = color.NULL;
+        neighbors = new ArrayList<>();
+
     }
 
     /**
@@ -68,19 +72,15 @@ public class defaultBoardField implements field {
 
     /**
      * Adds list of neighbors
-     * @param neighbors list of neighbors
+     * @param fields list of neighbors
      */
     @Override
-    public void setNeighbors(List<field> neighbors) {
-        if(this.neighbors == null) {
-            this.neighbors = new ArrayList<>();
-        }
-
-        for(field x: neighbors){
-            if(this.neighbors.size() < 6) {
-                this.neighbors.add(x);
-            } else {
-                break;
+    public void setNeighbors(List<field> fields) {
+        final int[][] vectors = {{2, 0}, {1, -1}, {-1, -1}, {-2, 0}, {-1, 1}, {1, 1}};
+        for(int i = 0; i < 6; i++) {
+            field tmp = field.getField(new defaultBoardField(this.getColumn() + vectors[i][0], this.getRow() + vectors[i][1]), fields);
+            if(tmp != null) {
+                this.addNeighbor(tmp);
             }
         }
     }
@@ -91,10 +91,6 @@ public class defaultBoardField implements field {
      */
     @Override
     public void addNeighbor(field newNeighbor) {
-        if(this.neighbors == null) {
-            this.neighbors = new ArrayList<>();
-        }
-
         if(this.neighbors.size() < 6) {
             this.neighbors.add(newNeighbor);
         }
@@ -143,7 +139,35 @@ public class defaultBoardField implements field {
     }
 
     @Override
-    public color setColor(color col) {
-        return null;
+    public void setColor(color col) {
+        playersColor = col;
+    }
+
+    /**
+     * get color of the field
+     *
+     * @return color of the field
+     */
+    @Override
+    public color getColor() {
+        return playersColor;
+    }
+
+    /**
+     * set pawn on the field
+     *
+     * @param newPawn pawn
+     */
+    @Override
+    public void setPawn(pawn newPawn) {
+        playersPawn = newPawn;
+    }
+
+    /**
+     * get pawn on the field
+     */
+    @Override
+    public pawn getPawn() {
+        return playersPawn;
     }
 }

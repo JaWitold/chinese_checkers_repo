@@ -14,9 +14,9 @@ public class boardBuilderForThree extends boardBuilder {
      */
     public void setTriangles() {
         //TODO: check get(i) numbers, if they are correct
-        addToTriangle(gameBoard.getField().get(0), color.RED, 4);
-        addToTriangle(gameBoard.getField().get(1), color.BLUE, 4);
-        addToTriangle(gameBoard.getField().get(2), color.YELLOW, 4);
+        addToTriangle(gameBoard.getFields().get(0), color.RED, 4);
+        addToTriangle(gameBoard.getFields().get(2), color.BLUE, 4);
+        addToTriangle(gameBoard.getFields().get(4), color.YELLOW, 4);
 
     }
 }

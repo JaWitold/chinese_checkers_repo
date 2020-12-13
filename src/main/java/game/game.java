@@ -21,13 +21,11 @@ public class game {
     public game(List<player> list) {
         playerLits = list;
         numberOfPlayers = playerLits.size();
+        sendToAll(String.valueOf(numberOfPlayers));
         constructor = new boardConstructor();
         constructor.setBoardBuilder(chooseBoardBuilder());
         constructor.constructBoard();
         gameBorad = constructor.getBoard();
-
-        System.out.println("Board is set up");
-
         setUpState();
     }
 
@@ -56,6 +54,10 @@ public class game {
             temp.get(i-1).setNext(temp.get(i%numberOfPlayers));
         }
 
-        System.out.println(temp);
+        //temp.forEach(x -> {System.out.println(x.getPlayer().getColor());});
+    }
+
+    void sendToAll(String msg) {
+        playerLits.forEach(player -> {player.sendMessage(msg);});
     }
 }

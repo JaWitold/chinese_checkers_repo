@@ -5,6 +5,7 @@ import borad.defaultGameBoard;
 import borad.field.defaultBoardField;
 import borad.field.field;
 import game.color;
+import game.pawn;
 
 /**
  * abstract board builder
@@ -25,52 +26,46 @@ public abstract class boardBuilder {
      */
     public void buildBoard() {
         //build all edges
-        //set vertices            {{ p5,  p6}, { p1,  p6}, { p5, p4}}
-        final int[][] verticesX = {{-12, -12}, {0, -12}, {-12, 0}};
-        final int[][] verticesY = {{-4, 4}, {8, 4}, {-4, -8}};
-        //set vectors           {{ ax,  ay}, { bx,  by}, { fx, fy}}
-        final int[][] vectors = {{2, 0}, {1, -1}, {1, 1}};
+        //set vertices          {p1, p2, p3, p4, p5, p6}
+        final int[] verticesX = {0, 12, 12, 0, -12, -12};
+        final int[] verticesY = {8,  4, -4, -8, -4,   4};
+        //set vectors
+        final int[][] vectors =   {{  1,   -1}, { -1,   -1}, {  -2,  0}, {  -1,   1}, { 1,   1}, {  2,  0}};
 
         for (int i = 0; i < 13; i++) {//for each line
-            for (int j = 0; j < 3; j++) {//for each vector
-                for (int k = 0; k < 2; k++) {//for each vertex
-                    //vector = (vectors[j][0], vectors[j][1])
-                    final int col = verticesX[j][k] + vectors[j][0] * i;
-                    final int row = verticesY[j][k] + vectors[j][1] * i;
-
-                    if (!field.exists(new defaultBoardField(col, row), gameBoard.getField()) && (i < 5 || i > 7)) {
-                        gameBoard.getField().add(new defaultBoardField(col, row, true));
-                    }
+            for (int j = 0; j < 6; j++) {//for each vector
+                //vector = (vectors[j][0], vectors[j][1])
+                final int col = verticesX[j] + vectors[j][0] * i;
+                final int row = verticesY[j] + vectors[j][1] * i;
+                if (!field.exists(new defaultBoardField(col, row), gameBoard.getFields()) && (i < 5 || i > 7)) {
+                    gameBoard.getFields().add(new defaultBoardField(col, row, true));
                 }
             }
         }
+
         //fill the center of the board
+        fillInnerFields(new defaultBoardField(0, 0));
+        gameBoard.getFields().forEach(field -> {field.setNeighbors(gameBoard.getFields());});
 
-        final field tmp = new defaultBoardField(0, 0);
-        setNeighbors(tmp);
-
-        /*for debugging
-          getField().forEach(field -> System.out.println("col "+ field.getColumn() + "\trow " + field.getRow() + "\tedge " + field.isEdge()));
-          System.out.println(getField().size());
-        */
+        /*for debugging*/
+        //gameBoard.getFields().forEach(field -> System.out.println("col "+ field.getColumn() + "\trow " + field.getRow() + "\tedge " + field.isEdge() + "\tneighbours " + field.getNeighbors().size()));
+        //System.out.println(gameBoard.getFields().size());
     }
 
     /**
-     * Recursive method that fills up all the field of the board
+     * Recursive method that fills up all the fields of the board
      * @param startingField starting field
      */
-    public void setNeighbors(field startingField) {
+    public void fillInnerFields(field startingField) {
         final int[][] vectors = {{2, 0}, {1, -1}, {-1, -1}, {-2, 0}, {-1, 1}, {1, 1}};
-        gameBoard.getField().add(startingField);
+        gameBoard.getFields().add(startingField);
         for(int i = 0; i < 6; i++) {
             int newColumn = vectors[i][0];
             int newRow = vectors[i][1];
 
-            if(!field.exists(new defaultBoardField(startingField.getColumn() + newColumn, startingField.getRow() + newRow), gameBoard.getField())){
+            if(!field.exists(new defaultBoardField(startingField.getColumn() + newColumn, startingField.getRow() + newRow), gameBoard.getFields())){
                 field tmp = new defaultBoardField(startingField.getColumn() + newColumn, startingField.getRow() + newRow);
-                startingField.addNeighbor(tmp);
-                tmp.addNeighbor(startingField);
-                setNeighbors(tmp);
+                fillInnerFields(tmp);
             }
         }
     }
@@ -81,12 +76,24 @@ public abstract class boardBuilder {
      * @param col - game.color of triangle
      * @param depth - max depth of recursion
      */
-    public void addToTriangle(field startingField, color col, int depth) {
+    public void addToTriangle(final field startingField, final color col, int depth) {
         startingField.setColor(col);
         if(depth > 0) {
             depth--;
             for(field x : startingField.getNeighbors()) {
                 addToTriangle(x, col, depth);
+            }
+        }
+    }
+
+    public void setPlayersPawns(final field startingField, final color col, int depth) {
+        startingField.setPawn(new pawn(col, startingField));
+        //System.out.println(startingField.getPawn().getColor());
+        if(depth > 1) {
+            depth--;
+            //System.out.println(depth + " " + col + " " + startingField.getColumn() + " " +startingField.getRow());
+            for(field x : startingField.getNeighbors()) {
+                setPlayersPawns(x, col, depth);
             }
         }
     }

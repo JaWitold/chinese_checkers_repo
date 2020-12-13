@@ -22,7 +22,7 @@ public class defaultGameBoard implements board {
      * @return list of field
      */
     @Override
-    public List<field> getField() {
+    public List<field> getFields() {
         return fieldsList;
     }
 

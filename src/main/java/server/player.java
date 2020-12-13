@@ -50,4 +50,12 @@ public class player implements Runnable {
             }
         }
     }
+
+    public color getColor() {
+        return myColor;
+    }
+
+    public void sendMessage(String msg) {
+        socketOutput.println(msg);
+    }
 }

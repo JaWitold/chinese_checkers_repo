@@ -1,6 +1,7 @@
 package borad.field;
 
 import game.color;
+import game.pawn;
 
 import java.util.List;
 
@@ -28,9 +29,9 @@ public interface field {
 
     /**
      * Adds list of neighbors
-     * @param neighbors list of neighbors
+     * @param fields list of neighbors
      */
-    void setNeighbors(List<field> neighbors);
+    void setNeighbors(List<field> fields);
 
     /**
      * Adds one neighbor to the list of neighbors
@@ -65,8 +66,8 @@ public interface field {
     boolean isNeighbor(field someField);
 
     /**
-     * Check if borad.field.field is in the List
-     * @param fieldToCheck borad.field.field
+     * Check if field is in the List
+     * @param fieldToCheck field
      * @param fieldsList list of fields
      * @return true if List contains this borad.field.field
      */
@@ -82,6 +83,19 @@ public interface field {
         return exists;
     }
 
+    static field getField (field fieldToFind, List<field> fieldsList) {
+        field tmp = null;
+        if (field.exists(fieldToFind, fieldsList)){
+            for (field cField : fieldsList) {
+                if(cField.getColumn() == fieldToFind.getColumn() && cField.getRow() == fieldToFind.getRow()) {
+                    tmp = cField;
+                    break;
+                }
+            }
+        }
+        return tmp;
+    }
+
     /**
      * Checks if two fields are neighbors are neighbors.
      * Notice that borad.field.field is not neighbor to itself
@@ -93,5 +107,25 @@ public interface field {
         return field.exists(f2, f1.getNeighbors());
     }
 
-    color setColor(color col);
+    /**
+     * set color of the field
+     * @param col color
+     */
+    void setColor(color col);
+
+    /**
+     * get color of the field
+     * @return color of the field
+     */
+    color getColor();
+
+    /**
+     * set pawn on the field
+     * @param newPawn pawn
+     */
+    void setPawn(pawn newPawn);
+    /**
+     * get pawn on the field
+     */
+    pawn getPawn();
 }

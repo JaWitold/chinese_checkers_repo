@@ -19,7 +19,7 @@ public class server {
             throw new Exception("No players number found. Please choose 2, 3, 4 or 6 players mode");
         }
 
-        int modes[] = {2, 3, 4, 6};
+        int[] modes = {2, 3, 4, 6};
         int mode = Integer.parseInt(args[0]);
         boolean validMode = false;
 
@@ -44,7 +44,6 @@ public class server {
                 player tmp = new player(socket.accept(), colorList.get(players.size()));
                 players.add(tmp);
                 executorService.execute(tmp);
-
             }
             System.out.println(players.size());
             serverGame = new game(players);
