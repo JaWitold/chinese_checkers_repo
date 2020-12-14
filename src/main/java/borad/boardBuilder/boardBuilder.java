@@ -91,16 +91,18 @@ public abstract class boardBuilder {
 
     public void setPlayersPawns(final field startingField, final color col, int depth) {
         pawn tmp = new pawn(col, startingField);
-        startingField.setPawn(tmp);
-        gameBoard.addPawn(tmp);
-        //System.out.println(startingField.getPawn().getColor());
-        if(depth > 1) {
-            depth--;
-            //System.out.println(depth + " " + col + " " + startingField.getColumn() + " " +startingField.getRow());
-            for(field x : startingField.getNeighbors()) {
-                setPlayersPawns(x, col, depth);
-            }
+        if(startingField.getPawn() == null) {
+            startingField.setPawn(tmp);
+            gameBoard.addPawn(tmp);
         }
+            //System.out.println(startingField.getPawn().getColor());
+            if (depth > 1) {
+                //System.out.println(depth + " " + col + " " + startingField.getColumn() + " " +startingField.getRow());
+                for (field x : startingField.getNeighbors()) {
+                    setPlayersPawns(x, col, depth - 1);
+                }
+            }
+
     }
 
     /**
