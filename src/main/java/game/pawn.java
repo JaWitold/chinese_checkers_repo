@@ -55,6 +55,28 @@ public class pawn {
         return exists;
     }
 
+    public static pawn getPawn(pawn pawnToCheck, List<pawn> pawnsList) {
+        pawn tmp = null;
+        for(pawn cPawn: pawnsList) {
+            if(cPawn.getColumn() == pawnToCheck.getColumn() && cPawn.getRow() == pawnToCheck.getRow()) {
+                tmp = cPawn;
+                break;
+            }
+        }
+        return tmp;
+    }
+
+    public static pawn getPawn(int column, int row, List<pawn> pawnsList) {
+        pawn tmp = null;
+        for(pawn cPawn: pawnsList) {
+            if(cPawn.getColumn() == column && cPawn.getRow() == row) {
+                tmp = cPawn;
+                break;
+            }
+        }
+        return tmp;
+    }
+
     public int getColumn() {
         return myField.getColumn();
     }

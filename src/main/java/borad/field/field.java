@@ -83,11 +83,36 @@ public interface field {
         return exists;
     }
 
+    static boolean exists (int column, int row, List<field> fieldsList) {
+        boolean exists = false;
+
+        for(field cField: fieldsList) {
+            if(cField.getColumn() == column && cField.getRow() == row) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
+    }
+
     static field getField (field fieldToFind, List<field> fieldsList) {
         field tmp = null;
         if (field.exists(fieldToFind, fieldsList)){
             for (field cField : fieldsList) {
                 if(cField.getColumn() == fieldToFind.getColumn() && cField.getRow() == fieldToFind.getRow()) {
+                    tmp = cField;
+                    break;
+                }
+            }
+        }
+        return tmp;
+    }
+
+    static field getField (int column, int row, List<field> fieldsList) {
+        field tmp = null;
+        if (field.exists(column, row, fieldsList)){
+            for (field cField : fieldsList) {
+                if(cField.getColumn() == column && cField.getRow() == row) {
                     tmp = cField;
                     break;
                 }

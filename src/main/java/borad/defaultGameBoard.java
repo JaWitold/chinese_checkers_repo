@@ -12,9 +12,18 @@ import java.util.concurrent.LinkedBlockingQueue;
  * board class
  */
 public class defaultGameBoard implements board {
+    /**
+     * The Fields list.
+     */
     protected List<field> fieldsList;
+    /**
+     * The Pawns list.
+     */
     protected List<pawn> pawnsList;
 
+    /**
+     * Instantiates a new Default game board.
+     */
     public defaultGameBoard(){
         fieldsList = new ArrayList<>();
         pawnsList = new ArrayList<>();
@@ -56,27 +65,36 @@ public class defaultGameBoard implements board {
         pawnsList.add(tmp);
     }
 
+    /**
+     * TODO: THIS FUNCTION SHOULD BE IN CLASS RULES. but right now its here
+     * @param start   the start
+     * @param finnish the finnish
+     * @return the boolean
+     */
     public boolean BFS(field start, field finnish) {
-        Queue<field> queue = new LinkedBlockingQueue<>();
+        if(finnish.getPawn() != null) {
+            return false;
+        }
+
+        Queue<field> toVisit = new LinkedBlockingQueue<>();
         List<field> visited = new ArrayList<>();
 
-        queue.add(start);
+        toVisit.add(start);
         visited.add(start);
-        while (!queue.isEmpty()) {
-            field node = queue.poll();
+        while (!toVisit.isEmpty()) {
+            field node = toVisit.poll();
 
             for (field x: node.getNeighbors()) {
                 if(x == finnish) {
-
                     return true;
                 } else if (x.getPawn() != null && !visited.contains(x)) {
                     for (field neighbors: x.getNeighbors()) {
                         if(neighbors.getPawn() == null && !visited.contains(neighbors)) {
-                            queue.add(neighbors);
+                            toVisit.add(neighbors);
                         }
                     }
                 }
-                queue.remove(x);
+                toVisit.remove(x);
             }
         }
         return false;

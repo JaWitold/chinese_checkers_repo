@@ -3,6 +3,8 @@ package game;
 import borad.board;
 import borad.boardBuilder.*;
 
+import borad.field.defaultBoardField;
+import borad.field.field;
 import server.player;
 import state.playersRound;
 import state.gameState;
@@ -25,27 +27,59 @@ public class game {
         gameBoard = setUpBoard();
         currentRound = setUpState();
         System.out.println("Starting the game");
-        //play();
+        play();
 
+        System.out.println(processCommand("MOVE:-3,-5,-4,-4"));
+        System.out.println(processCommand("MOVE:0,-8,-1,-7"));
+        System.out.println(processCommand("MOVE:0,0,-1,-7"));
         //for debugging
-        System.out.println(gameBoard.getPawns().size());
-        gameBoard.getPawns().forEach(x -> System.out.println(x.getColor() + " " + x.getField().getColumn() + " " + x.getField().getRow()));
+        //System.out.println(gameBoard.getPawns().size());
+        //gameBoard.getPawns().forEach(x -> System.out.println(x.getColor() + " " + x.getField().getColumn() + " " + x.getField().getRow()));
+        //System.out.println(gameBoard.movePawn(gameBoard.getPawns().get(0), field.getField(new defaultBoardField(-1, -7), gameBoard.getFields())));
+
     }
 
     private void play() {
         sendToAll("ROUND:" + currentRound.getPlayer().getColor());
-        while (true) {
-            Scanner input = currentRound.getPlayer().getSocketInput();
+        Scanner input = currentRound.getPlayer().getSocketInput();
+
+        while (input.hasNext()) {
             String message = input.nextLine();
             if(processCommand(message)) {
+                sendToAll(message);
                 break;
+            } else {
+                currentRound.getPlayer().sendMessage("WRONG");
             }
-            currentRound.goNext();
         }
+        currentRound.goNext();
+        play();
     }
 
     private boolean processCommand(String message) {
-        //TODO: process movement
+        if(message.startsWith("MOVE:")) {
+            try {
+                message = message.substring(message.indexOf(":") + 1, message.length());
+                int sColumn = Integer.parseInt(message.substring(0, message.indexOf(",")));
+                message = message.substring(message.indexOf(",") + 1, message.length());
+                int sRow = Integer.parseInt(message.substring(0, message.indexOf(",")));
+                message = message.substring(message.indexOf(",") + 1, message.length());
+                int dColumn = Integer.parseInt(message.substring(0, message.indexOf(",")));
+                message = message.substring(message.indexOf(",") + 1, message.length());
+                int dRow = Integer.parseInt(message.substring(0, message.length()));
+
+                //Check if player moves own pawn or if the pawn exists
+                pawn currentPawn = pawn.getPawn(sColumn, sRow, gameBoard.getPawns());
+                if(currentPawn == null || currentRound.getColor() != currentPawn.getColor()) {
+                    return false;
+                } else {
+                 return gameBoard.movePawn(currentPawn, field.getField(dColumn, dRow, gameBoard.getFields()));
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Error: wrong command MOVE:");
+                return false;
+            }
+        }
         return true;
     }
 

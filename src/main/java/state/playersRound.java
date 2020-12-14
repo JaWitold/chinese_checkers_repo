@@ -1,10 +1,14 @@
 package state;
 
+import game.color;
 import server.player;
 
+/**
+ * class round
+ */
 public class playersRound implements gameState {
     private player player;
-    private playersRound nextRound;
+    private gameState nextRound;
 
     public playersRound(player newPlayer) {
         player = newPlayer;
@@ -18,12 +22,17 @@ public class playersRound implements gameState {
 
     @Override
     public void setNext(gameState next) {
-
+        nextRound = next;
     }
 
     @Override
     public player getPlayer() {
         return player;
+    }
+
+    @Override
+    public color getColor() {
+        return player.getColor();
     }
 
     @Override
