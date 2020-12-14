@@ -10,7 +10,7 @@ public class boardBuilderForSix extends boardBuilder {
         //TODO: write this staff
         setPlayersPawns(gameBoard.getFields().get(0), color.RED, 4);
         setPlayersPawns(gameBoard.getFields().get(1), color.BLUE, 4);
-        setPlayersPawns(gameBoard.getFields().get(2), color.YELLOW, 4);//tested//
+        setPlayersPawns(gameBoard.getFields().get(2), color.YELLOW, 4);//tested///
         setPlayersPawns(gameBoard.getFields().get(3), color.GREEN, 4);
         setPlayersPawns(gameBoard.getFields().get(4), color.PURPLE, 4);
         setPlayersPawns(gameBoard.getFields().get(5), color.ORANGE, 4);
