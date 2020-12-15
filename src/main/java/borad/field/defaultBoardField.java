@@ -42,7 +42,6 @@ public class defaultBoardField implements field {
         playersColor = color.NULL;
         neighbors = new ArrayList<>();
         playersPawn = null;
-
     }
 
     /**

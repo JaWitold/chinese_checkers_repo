@@ -14,7 +14,7 @@ public class client {
     Socket socket;
     PrintWriter socketOutput;
     Scanner socketInput;
-    private player myPlayer;
+    protected static player myPlayer;
 
     public static void main(String[] args) {
 
@@ -34,7 +34,8 @@ public class client {
             int mode = socketInput.nextInt();
             System.out.println(mode);
             myPlayer.setBoard(setUpBoard(mode));
-            while (true) {}
+            System.out.println("Board is Ready");
+            //while (true) {}
 
         } catch (IOException e) {
             e.getStackTrace();
@@ -59,12 +60,11 @@ public class client {
     }
 
     private boardBuilder chooseBoardBuilder(int mode) {
-        boardBuilder tmp = switch (mode) {
+        return switch (mode) {
             case 6 -> new boardBuilderForSix();
             case 4 -> new boardBuilderForFour();
             case 3 -> new boardBuilderForThree();
             default -> new boardBuilderForTwo();
         };
-        return tmp;
     }
 }

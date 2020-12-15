@@ -17,4 +17,8 @@ public class player {
     public void setBoard(board newBoard) {
         myBoard = newBoard;
     }
+    public board getBoard() { return myBoard; }
+    public color getColor() {
+        return myColor;
+    }
 }
