@@ -84,7 +84,7 @@ public abstract class boardBuilder {
      */
     public void addToTriangle(final field startingField, final color col, int depth) {
         startingField.setColor(col);
-        if(depth > 0) {
+        if(depth > 1) {
             depth--;
             for(field x : startingField.getNeighbors()) {
                 addToTriangle(x, col, depth);

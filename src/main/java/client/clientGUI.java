@@ -25,7 +25,7 @@ public class clientGUI extends client {
 
         f.add(panel);
 
-        f.setSize(640, 480);
+        f.setSize(648, 517);
         f.setResizable(false);
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setLayout(null);
