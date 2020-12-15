@@ -8,6 +8,10 @@ public class pawn {
     private field myField;
     private color myColor;
 
+    /**
+     * @param newColor color of the pawn
+     * @param newField field where pawn stands
+     */
     public pawn (color newColor, field newField) {
         myColor = newColor;
         myField = newField;
@@ -43,6 +47,12 @@ public class pawn {
         this.myColor = myColor;
     }
 
+    /**
+     * Checks if the pawn exists in given List
+     * @param pawnToCheck pawn to check
+     * @param pawnsList List to check
+     * @return true if pawn is on the list
+     */
     public static boolean exists(pawn pawnToCheck, List<pawn> pawnsList) {
         boolean exists = false;
 
@@ -55,17 +65,22 @@ public class pawn {
         return exists;
     }
 
+    /**
+     * Returns pawn of the same coordinates as pawnToCheck
+     * @param pawnToCheck pawn to check
+     * @param pawnsList List of pawns
+     * @return
+     */
     public static pawn getPawn(pawn pawnToCheck, List<pawn> pawnsList) {
-        pawn tmp = null;
-        for(pawn cPawn: pawnsList) {
-            if(cPawn.getColumn() == pawnToCheck.getColumn() && cPawn.getRow() == pawnToCheck.getRow()) {
-                tmp = cPawn;
-                break;
-            }
-        }
-        return tmp;
+        return getPawn(pawnToCheck.getColumn(), pawnToCheck.getRow(), pawnsList);
     }
-
+    /**
+     * Returns pawn of the same coordinates as pawnToCheck
+     * @param column column
+     * @param row row
+     * @param pawnsList List of pawns
+     * @return
+     */
     public static pawn getPawn(int column, int row, List<pawn> pawnsList) {
         pawn tmp = null;
         for(pawn cPawn: pawnsList) {
@@ -77,10 +92,18 @@ public class pawn {
         return tmp;
     }
 
+    /**
+     * Getter of column
+     * @return column
+     */
     public int getColumn() {
         return myField.getColumn();
     }
 
+    /**
+     * Getter of row
+     * @return row
+     */
     public int getRow() {
         return myField.getRow();
     }

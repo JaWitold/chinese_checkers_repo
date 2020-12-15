@@ -41,6 +41,7 @@ public class defaultBoardField implements field {
         setEdge(edge);
         playersColor = color.NULL;
         neighbors = new ArrayList<>();
+        playersPawn = null;
 
     }
 
@@ -94,7 +95,6 @@ public class defaultBoardField implements field {
         if(this.neighbors.size() < 6) {
             this.neighbors.add(newNeighbor);
         }
-
     }
 
     /**
@@ -138,14 +138,17 @@ public class defaultBoardField implements field {
         return field.areNeighbors(this, someField);
     }
 
+    /**
+     * Setter for color
+     * @param col color
+     */
     @Override
     public void setColor(color col) {
         playersColor = col;
     }
 
     /**
-     * get color of the field
-     *
+     * Get color of the field
      * @return color of the field
      */
     @Override

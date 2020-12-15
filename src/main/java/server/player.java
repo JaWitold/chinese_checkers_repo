@@ -7,13 +7,20 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * Every player of the game is one thread
+ */
 public class player implements Runnable {
 
-    private Socket serverSocket;
+    private final Socket serverSocket;
     private Scanner socketInput;
     private PrintWriter socketOutput;
-    private color myColor;
+    private final color myColor;
 
+    /**
+     * @param newSocket web socket to communicate to the client
+     * @param playerColor color of the player
+     */
     public player(Socket newSocket, color playerColor) {
         serverSocket = newSocket;
         myColor = playerColor;
@@ -51,15 +58,26 @@ public class player implements Runnable {
         }
     }
 
+    /**
+     * @return color of the player
+     */
     public color getColor() {
         return myColor;
     }
 
+    /**
+     * Send message to client app
+     * @param msg message
+     */
     public void sendMessage(String msg) {
         socketOutput.println(msg);
     }
 
+    /**
+     * @return socket input
+     */
     public Scanner getSocketInput() {
         return socketInput;
     }
+
 }

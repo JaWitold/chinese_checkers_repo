@@ -55,7 +55,9 @@ public class defaultGameBoard implements board {
     public boolean movePawn(pawn currentPawn, field destination) {
         boolean tmp = BFS(currentPawn.getField(), destination);
         if(tmp) {
+            currentPawn.getField().setPawn(null);
             currentPawn.setField(destination);
+            currentPawn.getField().setPawn(currentPawn);
         }
         return tmp;
     }
@@ -66,6 +68,7 @@ public class defaultGameBoard implements board {
     }
 
     /**
+     * Function checks if move is possible. It uses modified BFS graph algorithm.
      * TODO: THIS FUNCTION SHOULD BE IN CLASS RULES. but right now its here
      * @param start   the start
      * @param finnish the finnish

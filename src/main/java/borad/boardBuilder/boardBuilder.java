@@ -7,19 +7,22 @@ import borad.field.field;
 import game.color;
 import game.pawn;
 
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
-
 /**
- * abstract board builder
+ * Abstract board builder
  */
 public abstract class boardBuilder {
     public board gameBoard;
 
+    /**
+     * @return game board
+     */
     public board getBoard() {
         return gameBoard;
     }
 
+    /**
+     * Sets new game board
+     */
     public void buildNewBoard() {
         gameBoard = new defaultGameBoard();
     }
@@ -89,6 +92,12 @@ public abstract class boardBuilder {
         }
     }
 
+    /**
+     * Sets pawns in recursive way
+     * @param startingField field from algorithm starts
+     * @param col color of pawns
+     * @param depth depth of recursion
+     */
     public void setPlayersPawns(final field startingField, final color col, int depth) {
         pawn tmp = new pawn(col, startingField);
         if(startingField.getPawn() == null) {

@@ -6,24 +6,24 @@ import game.pawn;
 import java.util.List;
 
 /**
- * interface of borad.field.field
+ * Interface of field
  */
 public interface field {
 
     /**
-     * sets col of borad.field.field
+     * Sets col of field
      * @param column col
      */
     void setColumn(int column);
 
     /**
-     * sets the row of borad.field.field
+     * Sets the row of field
      * @param row row
      */
     void setRow(int row);
 
     /**
-     * @param edge true if this borad.field.field is an edge
+     * @param edge true if this field is an edge
      */
     void setEdge(boolean edge);
 
@@ -40,28 +40,28 @@ public interface field {
     void addNeighbor(field newNeighbor);
 
     /**
-     * @return column number of borad.field.field
+     * @return column number of field
      */
     int getColumn();
 
     /**
-     * @return row number of borad.field.field
+     * @return row number of field
      */
     int getRow();
 
     /**
-     * @return list of neighbors of borad.field.field
+     * @return list of neighbors of field
      */
     List<field> getNeighbors();
 
     /**
-     * @return true if this borad.field.field is an edge
+     * @return true if this field is an edge
      */
     boolean isEdge();
 
     /**
-     * @param someField borad.field.field to check
-     * @return true if this borad.field.field and someField are neighbors
+     * @param someField field to check
+     * @return true if this field and someField are neighbors
      */
     boolean isNeighbor(field someField);
 
@@ -69,20 +69,19 @@ public interface field {
      * Check if field is in the List
      * @param fieldToCheck field
      * @param fieldsList list of fields
-     * @return true if List contains this borad.field.field
+     * @return true if List contains this field
      */
     static boolean exists (field fieldToCheck, List<field> fieldsList) {
-        boolean exists = false;
-
-        for(field cField: fieldsList) {
-            if(cField.getColumn() == fieldToCheck.getColumn() && cField.getRow() == fieldToCheck.getRow()) {
-                exists = true;
-                break;
-            }
-        }
-        return exists;
+        return field.exists(fieldToCheck.getColumn(), fieldToCheck.getRow(), fieldsList);
     }
 
+    /**
+     * Check if field is in the List
+     * @param column column
+     * @param row row
+     * @param fieldsList list of fields
+     * @return true if List contains this field
+     */
     static boolean exists (int column, int row, List<field> fieldsList) {
         boolean exists = false;
 
@@ -95,19 +94,21 @@ public interface field {
         return exists;
     }
 
+    /**
+     * @param fieldToFind field
+     * @param fieldsList List of fields
+     * @return field of the same coordinates as fieldTofind
+     */
     static field getField (field fieldToFind, List<field> fieldsList) {
-        field tmp = null;
-        if (field.exists(fieldToFind, fieldsList)){
-            for (field cField : fieldsList) {
-                if(cField.getColumn() == fieldToFind.getColumn() && cField.getRow() == fieldToFind.getRow()) {
-                    tmp = cField;
-                    break;
-                }
-            }
-        }
-        return tmp;
+        return field.getField(fieldToFind.getColumn(), fieldToFind.getRow(), fieldsList);
     }
 
+    /**
+     * @param column column
+     * @param row row
+     * @param fieldsList List of fields
+     * @return field of given coordinates
+     */
     static field getField (int column, int row, List<field> fieldsList) {
         field tmp = null;
         if (field.exists(column, row, fieldsList)){
@@ -123,9 +124,9 @@ public interface field {
 
     /**
      * Checks if two fields are neighbors are neighbors.
-     * Notice that borad.field.field is not neighbor to itself
-     * @param f1 borad.field.field
-     * @param f2 borad.field.field
+     * Notice that field is not neighbor to itself
+     * @param f1 field
+     * @param f2 field
      * @return true if f1 and f2 are neighbors
      */
     static boolean areNeighbors(field f1, field f2) {
@@ -133,24 +134,25 @@ public interface field {
     }
 
     /**
-     * set color of the field
+     * Set color of the field
      * @param col color
      */
     void setColor(color col);
 
     /**
-     * get color of the field
+     * Get color of the field
      * @return color of the field
      */
     color getColor();
 
     /**
-     * set pawn on the field
+     * Set pawn on the field
      * @param newPawn pawn
      */
     void setPawn(pawn newPawn);
+
     /**
-     * get pawn on the field
+     * Get pawn on the field
      */
     pawn getPawn();
 }
