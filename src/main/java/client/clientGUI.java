@@ -7,6 +7,7 @@ import game.color;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -16,13 +17,17 @@ import java.util.Scanner;
 public class clientGUI extends client {
     public JFrame f;
     public BoardGUI panel;
+    private myMouseListener mouse;
     public clientGUI() {
         super();
         run();
         System.out.println("Running client");
         f = new JFrame("Chinese Checkers");
         panel = new BoardGUI();
-
+        mouse = new myMouseListener();
+        mouse.setGUI(panel);
+        mouse.setPlayer(myPlayer);
+        f.addMouseListener(mouse);
         f.add(panel);
 
         f.setSize(648, 517);

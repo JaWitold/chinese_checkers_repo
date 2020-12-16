@@ -6,7 +6,7 @@ import game.*;
 public class player {
     private color myColor;
     private client myConnection;
-    private color currentRound;
+    public color currentRound;
     private board myBoard;
 
     public player(color myNewColor, client client) {

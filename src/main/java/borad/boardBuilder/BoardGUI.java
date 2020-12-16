@@ -70,4 +70,9 @@ public class BoardGUI extends JPanel {
             case NULL -> Color.WHITE;
         };
     }
+
+    public field getGUIField(int x, int y) {
+        //TODO: NIECH ZWRACA FIELDA JESLI JEST KLIKNIETY LUB NILL
+        return null;
+    }
 }
