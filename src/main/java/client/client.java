@@ -31,9 +31,17 @@ public class client {
             socketOutput = new PrintWriter(socket.getOutputStream(), true);
 
             myPlayer = new player(color.valueOf(socketInput.nextLine()), this);
-            int mode = socketInput.nextInt();
-            System.out.println(mode);
+
+            String message = socketInput.nextLine();
+            System.out.println(message);
+
+            int mode = Integer.parseInt(message.substring(0, message.indexOf(":")));
+            message = message.substring(2);
+            //System.out.println(mode + " "+ color.valueOf(message));
+
             myPlayer.setBoard(setUpBoard(mode));
+            myPlayer.currentRound = color.valueOf(message);
+
             System.out.println("Board is Ready");
             //while (true) {}
 

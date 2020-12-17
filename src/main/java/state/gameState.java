@@ -8,7 +8,7 @@ public interface gameState {
     /**
      * Goes to the next state
      */
-    void goNext();
+    gameState goNext();
 
     /**
      * Sets next state

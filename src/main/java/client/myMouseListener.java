@@ -30,6 +30,7 @@ public class myMouseListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(player.getColor() == player.currentRound) {
+            System.out.println(player.currentRound);
             x = e.getX();
             y = e.getY();
             if(highlighted != null) {
@@ -48,7 +49,7 @@ public class myMouseListener implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("Mouse Pressed");
+        //System.out.println("Mouse Pressed");
     }
 
     /**
@@ -58,7 +59,7 @@ public class myMouseListener implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println("Mouse Released");
+        //System.out.println("Mouse Released");
     }
 
     /**
@@ -68,7 +69,7 @@ public class myMouseListener implements MouseListener {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-        System.out.println("Mouse Entered");
+        //System.out.println("Mouse Entered");
     }
 
     /**
@@ -78,6 +79,6 @@ public class myMouseListener implements MouseListener {
      */
     @Override
     public void mouseExited(MouseEvent e) {
-        System.out.println("Mouse Exited");
+        //System.out.println("Mouse Exited");
     }
 }

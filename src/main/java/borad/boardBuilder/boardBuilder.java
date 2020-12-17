@@ -85,9 +85,8 @@ public abstract class boardBuilder {
     public void addToTriangle(final field startingField, final color col, int depth) {
         startingField.setColor(col);
         if(depth > 1) {
-            depth--;
             for(field x : startingField.getNeighbors()) {
-                addToTriangle(x, col, depth);
+                addToTriangle(x, col, depth - 1);
             }
         }
     }
@@ -105,12 +104,12 @@ public abstract class boardBuilder {
             gameBoard.addPawn(tmp);
         }
             //System.out.println(startingField.getPawn().getColor());
-            if (depth > 1) {
-                //System.out.println(depth + " " + col + " " + startingField.getColumn() + " " +startingField.getRow());
-                for (field x : startingField.getNeighbors()) {
-                    setPlayersPawns(x, col, depth - 1);
-                }
+        if (depth > 1) {
+            //System.out.println(depth + " " + col + " " + startingField.getColumn() + " " +startingField.getRow());
+            for (field x : startingField.getNeighbors()) {
+                setPlayersPawns(x, col, depth - 1);
             }
+        }
 
     }
 

@@ -14,14 +14,10 @@ public class playersRound implements gameState {
         player = newPlayer;
     }
 
-    /**
-     * Goes to the next state
-     */
+
     @Override
-    public void goNext() {
-        if(nextRound.getPlayer() != null) {
-            nextRound.goNext();
-        }
+    public gameState goNext() {
+       return nextRound;
     }
 
     /**

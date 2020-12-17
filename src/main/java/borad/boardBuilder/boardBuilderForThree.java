@@ -9,8 +9,8 @@ public class boardBuilderForThree extends boardBuilder {
     public void setPawns() {
 
         setPlayersPawns(gameBoard.getFields().get(4), color.RED, 4);
-        setPlayersPawns(gameBoard.getFields().get(2), color.BLUE, 4);
-        setPlayersPawns(gameBoard.getFields().get(0), color.YELLOW, 4);
+        setPlayersPawns(gameBoard.getFields().get(0), color.BLUE, 4);
+        setPlayersPawns(gameBoard.getFields().get(2), color.YELLOW, 4);
     }
     /**
      * This method sets all triangle's colors
