@@ -41,14 +41,21 @@ public class BoardGUI extends JPanel {
             graphic.setRenderingHints(hints);
 
             for (field fld : boardToDraw.getFields()) {
+
                 graphic.setPaint(translateColor(fld.getColor()));
                 offsetX = (float) (fld.getColumn() * 20.0 + 320.0);
                 offsetY = (float) (fld.getRow() * 25.0 + 240);
+                graphic.setPaint(translateColor(fld.getColor()));
                 graphic.fill(new Ellipse2D.Float(offsetX - radius/2, offsetY - radius/2, radius, radius));
                 if(fld.getPawn() != null) {
                     graphic.setPaint(translateColor(fld.getPawn().getColor()));
                     graphic.fill(new Ellipse2D.Float(offsetX - pawnSize/2, offsetY - pawnSize/2, pawnSize, pawnSize));
+                    graphic.setPaint(Color.WHITE);
+                    graphic.draw(new Ellipse2D.Float(offsetX - pawnSize/2, offsetY - pawnSize/2, pawnSize, pawnSize));
                 }
+                graphic.setPaint(Color.BLACK);
+                graphic.drawString(fld.getColumn() + " " + fld.getRow(), offsetX - pawnSize/3, offsetY);
+
             }
         }
     }
@@ -73,6 +80,20 @@ public class BoardGUI extends JPanel {
 
     public field getGUIField(int x, int y) {
         //TODO: NIECH ZWRACA FIELDA JESLI JEST KLIKNIETY LUB NULL
-        return null;
+        field tmp = null;
+        double min = Integer.MAX_VALUE;
+        for (field fld : boardToDraw.getFields()) {
+            offsetX = (float) (fld.getColumn() * 20.0 + 320.0);
+            offsetY = (float) (fld.getRow() * 25.0 + 240);
+            //System.out.println(offsetX + " " + offsetY + " "+ x + " " + y);
+            double d = Math.sqrt(Math.pow(Math.abs(offsetX - x), 2) + Math.pow(Math.abs(offsetY - y + 30), 2));
+            if(d < min) {
+                tmp = fld;
+                min = d;
+            }
+        }
+
+        System.out.println("CLIECKED: " + tmp.getColumn() + " " + tmp.getRow());
+        return tmp;
     }
 }

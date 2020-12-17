@@ -43,7 +43,7 @@ public class client {
             myPlayer.currentRound = color.valueOf(message);
 
             System.out.println("Board is Ready");
-            //while (true) {}
+
 
         } catch (IOException e) {
             e.getStackTrace();
@@ -52,8 +52,9 @@ public class client {
                 if(socket == null) {
                     throw new ServerException("Cannot connect to the server");
                 }
-                socket.close();
-                socketInput.close();
+                //socketOutput.println("QUIT");
+                //socket.close();
+                //socketInput.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }

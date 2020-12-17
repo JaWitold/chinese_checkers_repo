@@ -66,11 +66,12 @@ public abstract class boardBuilder {
         final int[][] vectors = {{2, 0}, {1, -1}, {-1, -1}, {-2, 0}, {-1, 1}, {1, 1}};
         gameBoard.getFields().add(startingField);
         for(int i = 0; i < 6; i++) {
-            int newColumn = vectors[i][0];
-            int newRow = vectors[i][1];
+            int newColumn = startingField.getColumn() + vectors[i][0];
+            int newRow = startingField.getRow() + vectors[i][1];
 
-            if(!field.exists(new defaultBoardField(startingField.getColumn() + newColumn, startingField.getRow() + newRow), gameBoard.getFields())){
-                field tmp = new defaultBoardField(startingField.getColumn() + newColumn, startingField.getRow() + newRow);
+            field tmp = new defaultBoardField(newColumn, newRow);
+
+            if(!field.exists(tmp, gameBoard.getFields())){
                 fillInnerFields(tmp);
             }
         }
@@ -107,9 +108,9 @@ public abstract class boardBuilder {
         if (depth > 1) {
             //System.out.println(depth + " " + col + " " + startingField.getColumn() + " " +startingField.getRow());
             for (field x : startingField.getNeighbors()) {
-                setPlayersPawns(x, col, depth - 1);
+                    setPlayersPawns(x, col, depth - 1);
             }
-        }
+            }
 
     }
 

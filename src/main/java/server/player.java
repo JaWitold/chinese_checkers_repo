@@ -6,6 +6,7 @@ import game.game;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
@@ -65,12 +66,21 @@ public class player implements Runnable {
 
     private void play() {
         while(socketInput.hasNextLine()) {
-            var command = socketInput.next();
+            String command = socketInput.nextLine();
+            System.out.println(command);
             if(command.startsWith("QUIT")){
-                return;
-            }
-            if(command.startsWith("MOVE:")) {
-                Game.processCommand(command, myColor);
+                System.out.println(myColor + " left.");
+                System.exit(2);
+            } else if(command.startsWith("MOVE:")) {
+                if(Game.processCommand(command, myColor)) {
+                    Game.currentRound = Game.currentRound.goNext();
+                    String message = command + ";ROUND:" + Game.currentRound.getColor();
+                    System.out.println(message);
+                    //System.out.println("is correct ");
+                    Game.sendToAll(message);
+                } else {
+                    socketOutput.println("WRONG");
+                }
             }
         }
     }

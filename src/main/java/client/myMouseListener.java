@@ -30,14 +30,27 @@ public class myMouseListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(player.getColor() == player.currentRound) {
-            System.out.println(player.currentRound);
+            //System.out.println(player.currentRound);
             x = e.getX();
             y = e.getY();
-            if(highlighted != null) {
+
+            if(highlighted == null) {
                highlighted = GUI.getGUIField(x, y);
             } else {
                 destination = GUI.getGUIField(x, y);
-                //TODO make move, wait for next round
+                String message = "MOVE:" + highlighted.getColumn() +","+ highlighted.getRow()+","+destination.getColumn()+","+destination.getRow();
+                System.out.println(message);
+                player.sendMessage(message);
+                highlighted = null;
+                destination = null;
+                if(player.processCommand(player.waitForResponse())){
+                    GUI.repaint();
+                }
+                while(player.currentRound != player.getColor()){
+                    if(player.processCommand(player.waitForResponse())) {
+                        GUI.repaint();
+                    }
+                }
             }
         }
     }

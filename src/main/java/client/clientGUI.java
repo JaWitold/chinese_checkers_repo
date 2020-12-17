@@ -1,23 +1,15 @@
 package client;
 
-import borad.board;
 import borad.boardBuilder.BoardGUI;
-import borad.boardBuilder.boardConstructor;
-import game.color;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.rmi.ServerException;
-import java.util.Scanner;
+
 
 public class clientGUI extends client {
     public JFrame f;
     public BoardGUI panel;
-    private myMouseListener mouse;
+    private final myMouseListener mouse;
+
     public clientGUI() {
         super();
         run();
@@ -42,6 +34,7 @@ public class clientGUI extends client {
 
         cli.f.setTitle(String.valueOf(myPlayer.getColor()));
         cli.panel.setBoardToDraw(myPlayer.getBoard());
+
     }
 
 

@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class game {
     private final int numberOfPlayers;
     private final List<player> playerList;
-    private gameState currentRound;
+    public gameState currentRound;
     private final board gameBoard;
 
     /**
@@ -103,7 +103,7 @@ public class game {
                 }
             }
         }
-        return true;
+        return false;
     }
 
 
@@ -162,7 +162,7 @@ public class game {
      *
      * @param msg - message to sent
      */
-    void sendToAll(String msg) {
+    public void sendToAll(String msg) {
         playerList.forEach(player -> {player.sendMessage(msg);});
     }
 
