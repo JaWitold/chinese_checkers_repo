@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>server</OriginalElement>
+  <nodes>
+    <node x="0.0" y="75.0">server.server</node>
+    <node x="0.0" y="150.0">server.player</node>
+    <node x="0.0" y="0.0">server.serverTest</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="64.0" y="90.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

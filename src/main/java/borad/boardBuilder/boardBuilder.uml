@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>borad.boardBuilder</OriginalElement>
+  <nodes>
+    <node x="352.0" y="0.0">borad.boardBuilder.boardBuilder</node>
+    <node x="0.0" y="80.0">borad.boardBuilder.boardBuilderForSix</node>
+    <node x="221.0" y="155.0">borad.boardBuilder.BoardGUI</node>
+    <node x="212.0" y="80.0">borad.boardBuilder.boardBuilderForFour</node>
+    <node x="432.0" y="80.0">borad.boardBuilder.boardBuilderForThree</node>
+    <node x="660.0" y="80.0">borad.boardBuilder.boardBuilderForTwo</node>
+    <node x="0.0" y="155.0">borad.boardBuilder.boardConstructor</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="borad.boardBuilder.boardBuilderForFour" target="borad.boardBuilder.boardBuilder">
+      <point x="0.0" y="-15.0" />
+      <point x="312.0" y="60.0" />
+      <point x="406.0" y="60.0" />
+      <point x="-18.0" y="15.0" />
+    </edge>
+    <edge source="borad.boardBuilder.boardBuilderForSix" target="borad.boardBuilder.boardBuilder">
+      <point x="0.0" y="-15.0" />
+      <point x="96.0" y="50.0" />
+      <point x="370.0" y="50.0" />
+      <point x="-54.0" y="15.0" />
+    </edge>
+    <edge source="borad.boardBuilder.boardBuilderForThree" target="borad.boardBuilder.boardBuilder">
+      <point x="0.0" y="-15.0" />
+      <point x="536.0" y="60.0" />
+      <point x="442.0" y="60.0" />
+      <point x="18.0" y="15.0" />
+    </edge>
+    <edge source="borad.boardBuilder.boardBuilderForTwo" target="borad.boardBuilder.boardBuilder">
+      <point x="0.0" y="-15.0" />
+      <point x="756.0" y="50.0" />
+      <point x="478.0" y="50.0" />
+      <point x="54.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="426.0" y="92.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
