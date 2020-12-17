@@ -30,7 +30,6 @@ public class myMouseListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(player.getColor() == player.currentRound) {
-            //System.out.println(player.currentRound);
             x = e.getX();
             y = e.getY();
 
@@ -43,14 +42,6 @@ public class myMouseListener implements MouseListener {
                 player.sendMessage(message);
                 highlighted = null;
                 destination = null;
-                if(player.processCommand(player.waitForResponse())){
-                    GUI.repaint();
-                }
-                while(player.currentRound != player.getColor()){
-                    if(player.processCommand(player.waitForResponse())) {
-                        GUI.repaint();
-                    }
-                }
             }
         }
     }

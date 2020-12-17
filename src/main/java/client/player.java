@@ -6,8 +6,8 @@ import borad.field.field;
 import game.*;
 
 public class player {
-    private color myColor;
-    private client myConnection;
+    private final color myColor;
+    private final client myConnection;
     public color currentRound;
     private board myBoard;
 
@@ -28,13 +28,7 @@ public class player {
         myConnection.socketOutput.println(message);
     }
 
-    public String waitForResponse() {
-        String tmp = myConnection.socketInput.nextLine();
-        System.out.println(tmp);
-        return tmp;
-    }
-
-    public boolean processCommand(String message) {
+    public void processCommand(String message) {
         if(message.startsWith("MOVE:")) {
             try {
                 message = message.substring(message.indexOf(":") + 1);
@@ -49,11 +43,26 @@ public class player {
                 currentRound = color.valueOf(message);
                 System.out.println(currentRound);
                 myBoard.movePawn(pawn.getPawn(sColumn, sRow, myBoard.getPawns()), field.getField(dColumn, dRow, myBoard.getFields()));
-                return true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return false;
+    }
+
+    public void play() throws Exception {
+        try {
+            while(myConnection.socketInput.hasNextLine()) {
+                final String response = myConnection.socketInput.nextLine();
+                if(response.startsWith("MOVE:")) {
+                    processCommand(response);
+                    clientGUI GUI = (clientGUI) myConnection;
+                    GUI.getPanel().repaint();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            myConnection.socket.close();
+        }
     }
 }

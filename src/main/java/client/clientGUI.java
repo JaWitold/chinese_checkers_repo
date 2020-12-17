@@ -34,7 +34,16 @@ public class clientGUI extends client {
 
         cli.f.setTitle(String.valueOf(myPlayer.getColor()));
         cli.panel.setBoardToDraw(myPlayer.getBoard());
+        try {
+            myPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    public JPanel getPanel() {
+        return panel;
     }
 
 
