@@ -19,17 +19,17 @@
       <point x="406.0" y="60.0" />
       <point x="-18.0" y="15.0" />
     </edge>
-    <edge source="borad.boardBuilder.boardBuilderForSix" target="borad.boardBuilder.boardBuilder">
-      <point x="0.0" y="-15.0" />
-      <point x="96.0" y="50.0" />
-      <point x="370.0" y="50.0" />
-      <point x="-54.0" y="15.0" />
-    </edge>
     <edge source="borad.boardBuilder.boardBuilderForThree" target="borad.boardBuilder.boardBuilder">
       <point x="0.0" y="-15.0" />
       <point x="536.0" y="60.0" />
       <point x="442.0" y="60.0" />
       <point x="18.0" y="15.0" />
+    </edge>
+    <edge source="borad.boardBuilder.boardBuilderForSix" target="borad.boardBuilder.boardBuilder">
+      <point x="0.0" y="-15.0" />
+      <point x="96.0" y="50.0" />
+      <point x="370.0" y="50.0" />
+      <point x="-54.0" y="15.0" />
     </edge>
     <edge source="borad.boardBuilder.boardBuilderForTwo" target="borad.boardBuilder.boardBuilder">
       <point x="0.0" y="-15.0" />
@@ -39,7 +39,9 @@
     </edge>
   </edges>
   <settings layout="Hierarchic Group" zoom="1.0" x="426.0" y="92.5" />
-  <SelectedNodes />
+  <SelectedNodes>
+    <node>borad.boardBuilder.boardBuilder</node>
+  </SelectedNodes>
   <Categories />
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
