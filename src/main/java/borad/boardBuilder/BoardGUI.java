@@ -72,7 +72,7 @@ public class BoardGUI extends JPanel {
     }
 
     public field getGUIField(int x, int y) {
-        //TODO: NIECH ZWRACA FIELDA JESLI JEST KLIKNIETY LUB NILL
+        //TODO: NIECH ZWRACA FIELDA JESLI JEST KLIKNIETY LUB NULL
         return null;
     }
 }

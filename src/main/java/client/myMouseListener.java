@@ -48,7 +48,7 @@ public class myMouseListener implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-
+        System.out.println("Mouse Pressed");
     }
 
     /**
@@ -58,7 +58,7 @@ public class myMouseListener implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        System.out.println("Mouse Released");
     }
 
     /**
@@ -78,6 +78,6 @@ public class myMouseListener implements MouseListener {
      */
     @Override
     public void mouseExited(MouseEvent e) {
-
+        System.out.println("Mouse Exited");
     }
 }
