@@ -75,8 +75,9 @@ public class player implements Runnable {
                 if(Game.processCommand(command, myColor)) {
                     Game.currentRound = Game.currentRound.goNext();
                     String message = command + ";ROUND:" + Game.currentRound.getColor();
-                    System.out.println(message);
-                    //System.out.println("is correct ");
+                    if(Game.processCommand("WON", myColor)){
+                        message = "WON:" + myColor;
+                    }
                     Game.sendToAll(message);
                 } else {
                     socketOutput.println("WRONG");

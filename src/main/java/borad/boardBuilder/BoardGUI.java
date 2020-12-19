@@ -30,7 +30,7 @@ public class BoardGUI extends JPanel {
 
     public void draw(Graphics g) {
         if(boardToDraw != null) {
-            System.out.println("rysuje");
+            System.out.println("drawing the board");
             Graphics2D graphic = (Graphics2D) g;
             //antialiasing
             RenderingHints hints = new RenderingHints (
@@ -79,7 +79,6 @@ public class BoardGUI extends JPanel {
     }
 
     public field getGUIField(int x, int y) {
-        //TODO: NIECH ZWRACA FIELDA JESLI JEST KLIKNIETY LUB NULL
         field tmp = null;
         double min = Integer.MAX_VALUE;
         for (field fld : boardToDraw.getFields()) {
@@ -87,12 +86,12 @@ public class BoardGUI extends JPanel {
             offsetY = (float) (fld.getRow() * 25.0 + 240);
             //System.out.println(offsetX + " " + offsetY + " "+ x + " " + y);
             double d = Math.sqrt(Math.pow(Math.abs(offsetX - x), 2) + Math.pow(Math.abs(offsetY - y + 30), 2));
+
             if(d < min) {
                 tmp = fld;
                 min = d;
             }
         }
-
         System.out.println("CLIECKED: " + tmp.getColumn() + " " + tmp.getRow());
         return tmp;
     }

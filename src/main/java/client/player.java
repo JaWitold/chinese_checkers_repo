@@ -5,15 +5,20 @@ import borad.boardBuilder.BoardGUI;
 import borad.field.field;
 import game.*;
 
+import javax.swing.*;
+import java.io.IOException;
+
 public class player {
     private final color myColor;
     private final client myConnection;
-    public color currentRound;
+    private final clientGUI myGUI;
+    private color currentRound;
     private board myBoard;
 
-    public player(color myNewColor, client client) {
+    public player(color myNewColor, client newClient, clientGUI newGUI) {
         myColor = myNewColor;
-        myConnection = client;
+        myConnection = newClient;
+        myGUI = newGUI;
     }
 
     public void setBoard(board newBoard) {
@@ -41,7 +46,6 @@ public class player {
                 int dRow = Integer.parseInt(message.substring(0, message.indexOf(";")));
                 message = message.substring(message.indexOf(":") + 1);
                 currentRound = color.valueOf(message);
-                System.out.println(currentRound);
                 myBoard.movePawn(pawn.getPawn(sColumn, sRow, myBoard.getPawns()), field.getField(dColumn, dRow, myBoard.getFields()));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -49,20 +53,37 @@ public class player {
         }
     }
 
-    public void play() throws Exception {
+    public void play() {
         try {
             while(myConnection.socketInput.hasNextLine()) {
                 final String response = myConnection.socketInput.nextLine();
                 if(response.startsWith("MOVE:")) {
                     processCommand(response);
-                    clientGUI GUI = (clientGUI) myConnection;
-                    GUI.getPanel().repaint();
+                    myGUI.repaint();
+                    myGUI.updateTitle();
+                } else if (response.startsWith("QUIT")) {
+                    JOptionPane.showMessageDialog(myGUI.getFrame(), "OTHER PLAYER LEFT");
+                    break;
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            myConnection.socket.close();
+            try {
+
+                myConnection.socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public color getCurrentRound() {
+        return currentRound;
+    }
+
+    public void setCurrentRound(color newRound) {
+        currentRound = newRound;
     }
 }

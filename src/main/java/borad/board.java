@@ -24,7 +24,7 @@ public interface board {
      * @param destination field
      * @return true if movement was successful, false if this move was wrong
      */
-    boolean movePawn(pawn currentPawn, field destination);
+    void movePawn(pawn currentPawn, field destination);
 
     /**
      * Adds Pawn to gameboard

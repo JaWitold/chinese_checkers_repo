@@ -14,23 +14,23 @@ public class client {
     Socket socket;
     PrintWriter socketOutput;
     Scanner socketInput;
-    protected static player myPlayer;
+    private static player myPlayer;
 
     public static void main(String[] args) {
 
         client cli = new client();
         System.out.println("Running client");
-        cli.run();
+        cli.run(null);
 
     }
 
-    public void run() {
+    public void run(clientGUI GUI) {
         try {
             socket = new Socket("localhost", 50000);
             socketInput = new Scanner(socket.getInputStream());
             socketOutput = new PrintWriter(socket.getOutputStream(), true);
 
-            myPlayer = new player(color.valueOf(socketInput.nextLine()), this);
+            myPlayer = new player(color.valueOf(socketInput.nextLine()), this, GUI);
 
             String message = socketInput.nextLine();
             System.out.println(message);
@@ -40,7 +40,7 @@ public class client {
             //System.out.println(mode + " "+ color.valueOf(message));
 
             myPlayer.setBoard(setUpBoard(mode));
-            myPlayer.currentRound = color.valueOf(message);
+            myPlayer.setCurrentRound(color.valueOf(message));
 
             System.out.println("Board is Ready");
 
@@ -52,9 +52,6 @@ public class client {
                 if(socket == null) {
                     throw new ServerException("Cannot connect to the server");
                 }
-                //socketOutput.println("QUIT");
-                //socket.close();
-                //socketInput.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -75,5 +72,13 @@ public class client {
             case 3 -> new boardBuilderForThree();
             default -> new boardBuilderForTwo();
         };
+    }
+
+    public void send(String message) {
+        socketOutput.println(message);
+    }
+
+    public player getPlayer() {
+        return myPlayer;
     }
 }

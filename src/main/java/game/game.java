@@ -21,6 +21,7 @@ public class game {
     private final List<player> playerList;
     public gameState currentRound;
     private final board gameBoard;
+    private final Rules rulesSet;
 
     /**
      * Instantiates a new Game.
@@ -34,6 +35,8 @@ public class game {
         System.out.println("current: " + currentRound.getColor());
         sendToAll(numberOfPlayers + ":" + currentRound.getColor());
         gameBoard = setUpBoard(numberOfPlayers);
+
+        rulesSet = new defaultRulesSet(gameBoard);
 
         System.out.println("Starting the game");
         //play();
@@ -95,12 +98,17 @@ public class game {
                     if (currentPawn == null || currentRound.getColor() != currentPawn.getColor()) {
                         return false;
                     } else {
-                        return gameBoard.movePawn(currentPawn, field.getField(dColumn, dRow, gameBoard.getFields()));
+                        if(rulesSet.isItPossibleMove(currentPawn.getField(), field.getField(dColumn, dRow, gameBoard.getFields()))) {
+                            gameBoard.movePawn(currentPawn, field.getField(dColumn, dRow, gameBoard.getFields()));
+                            return true;
+                        }
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Error: wrong command MOVE:");
                     return false;
                 }
+            } else if(message.startsWith("WON:")) {
+                return rulesSet.hasWon(playersColor);
             }
         }
         return false;

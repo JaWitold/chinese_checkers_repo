@@ -52,14 +52,10 @@ public class defaultGameBoard implements board {
      * @return true if movement was successful, false if this move was wrong
      */
     @Override
-    public boolean movePawn(pawn currentPawn, field destination) {
-        boolean tmp = BFS(currentPawn.getField(), destination);
-        if(tmp) {
-            currentPawn.getField().setPawn(null);
-            currentPawn.setField(destination);
-            currentPawn.getField().setPawn(currentPawn);
-        }
-        return tmp;
+    public void movePawn(pawn currentPawn, field destination) {
+        currentPawn.getField().setPawn(null);
+        currentPawn.setField(destination);
+        currentPawn.getField().setPawn(currentPawn);
     }
 
     @Override
@@ -67,39 +63,5 @@ public class defaultGameBoard implements board {
         pawnsList.add(tmp);
     }
 
-    /**
-     * Function checks if move is possible. It uses modified BFS graph algorithm.
-     * TODO: THIS FUNCTION SHOULD BE IN CLASS RULES. but right now its here
-     * @param start   the start
-     * @param finnish the finnish
-     * @return the boolean
-     */
-    public boolean BFS(field start, field finnish) {
-        if(finnish.getPawn() != null) {
-            return false;
-        }
 
-        Queue<field> toVisit = new LinkedBlockingQueue<>();
-        List<field> visited = new ArrayList<>();
-
-        toVisit.add(start);
-        visited.add(start);
-        while (!toVisit.isEmpty()) {
-            field node = toVisit.poll();
-
-            for (field x: node.getNeighbors()) {
-                if(x == finnish) {
-                    return true;
-                } else if (x.getPawn() != null && !visited.contains(x)) {
-                    for (field neighbors: x.getNeighbors()) {
-                        if(neighbors.getPawn() == null && !visited.contains(neighbors)) {
-                            toVisit.add(neighbors);
-                        }
-                    }
-                }
-                toVisit.remove(x);
-            }
-        }
-        return false;
-    }
 }

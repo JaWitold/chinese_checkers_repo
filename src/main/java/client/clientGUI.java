@@ -4,47 +4,64 @@ import borad.boardBuilder.BoardGUI;
 
 import javax.swing.*;
 
+public class clientGUI {
 
-public class clientGUI extends client {
-    public JFrame f;
-    public BoardGUI panel;
-    private final myMouseListener mouse;
+    private final JFrame gameFrame;
+    private final BoardGUI gameBoardGUI;
+    private final myMouseListener gameMouseListener;
+    private final client gameClient;
+    public final player gamePlayer;
 
-    public clientGUI() {
-        super();
-        run();
-        System.out.println("Running client");
-        f = new JFrame("Chinese Checkers");
-        panel = new BoardGUI();
-        mouse = new myMouseListener();
-        mouse.setGUI(panel);
-        mouse.setPlayer(myPlayer);
-        f.addMouseListener(mouse);
-        f.add(panel);
+    public clientGUI(client newClient) {
+        gameClient = newClient;
+        gameClient.run(this);
+        gamePlayer = gameClient.getPlayer();
 
-        f.setSize(648, 517);
-        f.setResizable(false);
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setLayout(null);
-        f.setVisible(true);
+        gameFrame = new JFrame("Chinese Checkers");
+        updateTitle();
+        gameBoardGUI = new BoardGUI();
+        gameMouseListener = new myMouseListener();
     }
 
     public static void main(String[] args) {
-        clientGUI cli = new clientGUI();
-
-        cli.f.setTitle(String.valueOf(myPlayer.getColor()));
-        cli.panel.setBoardToDraw(myPlayer.getBoard());
-        try {
-            myPlayer.play();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        clientGUI GUI = new clientGUI(new client());
+        GUI.setup();
+        GUI.play();
     }
 
-    public JPanel getPanel() {
-        return panel;
+    private void setup() {
+        System.out.println("Setting up GUI");
+
+        gameMouseListener.setGUI(gameBoardGUI);
+        gameMouseListener.setPlayer(gamePlayer);
+        gameFrame.addMouseListener(gameMouseListener);
+        gameFrame.add(gameBoardGUI);
+
+        gameFrame.setSize(648, 517);
+        gameFrame.setResizable(false);
+        gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        gameFrame.setLayout(null);
+        gameFrame.setVisible(true);
+
+        gameBoardGUI.setBoardToDraw(gamePlayer.getBoard());
     }
 
+    private void play() {
+        gamePlayer.play();
+    }
+
+    public JPanel getGameBoardGUI() {
+        return gameBoardGUI;
+    }
+
+    public void updateTitle(){
+        gameFrame.setTitle(gamePlayer.getColor() + " | ROUND: " + gamePlayer.getCurrentRound());}
+
+    public JFrame getFrame() {
+        return gameFrame;
+    }
+    public void repaint() {
+        this.gameBoardGUI.repaint();
+    }
 
 }

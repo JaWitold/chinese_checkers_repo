@@ -29,7 +29,7 @@ public class myMouseListener implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(player.getColor() == player.currentRound) {
+        if(player.getColor() == player.getCurrentRound()) {
             x = e.getX();
             y = e.getY();
 

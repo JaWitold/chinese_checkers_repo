@@ -5,12 +5,13 @@
   <nodes>
     <node x="0.0" y="75.0">server.server</node>
     <node x="0.0" y="150.0">server.player</node>
-    <node x="0.0" y="0.0">server.serverTest</node>
   </nodes>
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="64.0" y="90.0" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="1.0" x="48.5" y="127.5" />
+  <SelectedNodes>
+    <node>server.server</node>
+  </SelectedNodes>
   <Categories />
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
