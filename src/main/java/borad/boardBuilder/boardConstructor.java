@@ -1,30 +1,33 @@
 package borad.boardBuilder;
 
-import borad.board;
+import borad.BoardInterface;
 
 /**
- * Constructor of the board
+ * Constructor of the BoardInterface
  */
 public class boardConstructor {
-    private boardBuilder builder;
+    private AbstractBoardBuilder builder;
 
     /**
-     * Sets new board builder
-     * @param newBuilder board builder
+     * Sets new BoardInterface builder
+     *
+     * @param newBuilder BoardInterface builder
      */
-    public void setBoardBuilder(boardBuilder newBuilder) {
+    public void setBoardBuilder(AbstractBoardBuilder newBuilder) {
         this.builder = newBuilder;
     }
 
     /**
-     * @return board
+     * Gets BoardInterface.
+     *
+     * @return BoardInterface BoardInterface
      */
-    public board getBoard() {
+    public BoardInterface getBoard() {
         return builder.getBoard();
     }
 
     /**
-     * Constructs the board
+     * Constructs the BoardInterface
      */
     public void constructBoard() {
         builder.buildNewBoard();

@@ -1,4 +1,4 @@
 /**
- * This is board builder package
+ * This is BoardInterface builder package
  */
 package borad.boardBuilder;

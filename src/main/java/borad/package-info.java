@@ -1,4 +1,4 @@
 /**
- * This part is board package part of this project
+ * This part is BoardInterface package part of this project
  */
 package borad;
