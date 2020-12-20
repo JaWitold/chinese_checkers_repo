@@ -133,6 +133,13 @@ public class Player {
                             myGUI.getFrame(), "OTHER PLAYER LEFT"
                     );
                     break;
+                } else if (response.startsWith("WON")) {
+                    final String message = response.substring(response.indexOf(":") + 1);
+                    JOptionPane.showMessageDialog(
+                            myGUI.getFrame(),
+                            message + " has won!"
+                    );
+                    break;
                 }
             }
 

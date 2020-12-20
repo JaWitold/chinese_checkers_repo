@@ -14,6 +14,7 @@ public class BoardBuilderForTwo extends AbstractBoardBuilder {
         setPlayersPawns(getBoard().getFields().get(3), CustomColor.RED, 4);
         setPlayersPawns(getBoard().getFields().get(0), CustomColor.BLUE, 4);
 
+
     }
     /**
      * This method sets all triangle's colors.

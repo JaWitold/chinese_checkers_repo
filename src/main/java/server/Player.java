@@ -91,13 +91,18 @@ public class Player implements Runnable {
                 System.exit(2);
             } else if (command.startsWith("MOVE:")) {
                 if (theGame.processCommand(command, myColor)) {
-                    theGame.setCurrentRound(theGame.getCurrentRound().goNext());
                     String message = command
                             + ";ROUND:"
                             + theGame.getCurrentRound().getColor();
-                    if (theGame.processCommand("WON", myColor)) {
+
+                    if (theGame.processCommand("WON:", myColor)) {
                         message = "WON:" + myColor;
+                        theGame.sendToAll(message);
+                        System.exit(0);
                     }
+
+                    theGame.setCurrentRound(theGame.getCurrentRound().goNext());
+
                     theGame.sendToAll(message);
                 } else {
                     socketOutput.println("WRONG");

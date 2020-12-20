@@ -54,7 +54,7 @@ public class Game {
         gameBoard = setUpBoard(numberOfPlayers);
         rulesSet = new RulesSet(gameBoard);
         System.out.println("Starting the Game");
-        while (true) { }
+        //while (true) { }
     }
 
     public GameStateInterface getCurrentRound() {
@@ -112,7 +112,7 @@ public class Game {
                     System.out.println("Error: wrong command MOVE:");
                     return false;
                 }
-            } else if (message.startsWith("WON:")) {
+            } else if (message.startsWith("WON")) {
                 return rulesSet.hasWon(playersColor);
             }
         }
@@ -171,22 +171,10 @@ public class Game {
 
     /**
      * Sends the same message to all players.
-     *
      * @param message - message to sent
      */
     public void sendToAll(final String message) {
-        playerList.forEach(Player -> {
-            Player.sendMessage(message);
-        });
-    }
-
-    /**
-     * Get number of players int.
-     *
-     * @return the int
-     */
-    public int getNumberOfPlayers() {
-        return numberOfPlayers;
+        playerList.forEach(Player -> Player.sendMessage(message));
     }
 
     public void setCurrentRound(final GameStateInterface goNext) {

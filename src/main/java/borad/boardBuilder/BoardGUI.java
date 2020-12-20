@@ -52,7 +52,7 @@ public class BoardGUI extends JPanel {
      */
     public void draw(final Graphics g) {
         if (boardToDraw != null) {
-            System.out.println("drawing the BoardInterface");
+            System.out.println("drawing the Board");
             Graphics2D graphic = (Graphics2D) g;
             //antialiasing
             RenderingHints hints = new RenderingHints(
@@ -75,20 +75,20 @@ public class BoardGUI extends JPanel {
                 if (fld.getPawn() != null) {
                     graphic.setPaint(translateColor(fld.getPawn().getColor()));
                     graphic.fill(new Ellipse2D.Float(
-                            offsetX - PAWN_SIZE / 2,
-                            offsetY - PAWN_SIZE / 2,
+                            offsetX - (PAWN_SIZE / 2),
+                            offsetY - (PAWN_SIZE / 2),
                             PAWN_SIZE,
                             PAWN_SIZE));
                     graphic.setPaint(Color.WHITE);
                     graphic.draw(new Ellipse2D.Float(
-                            offsetX - PAWN_SIZE / 2,
-                            offsetY - PAWN_SIZE / 2,
+                            offsetX - (PAWN_SIZE / 2),
+                            offsetY - (PAWN_SIZE / 2),
                             PAWN_SIZE,
                             PAWN_SIZE));
                 }
                 graphic.setPaint(Color.BLACK);
                 graphic.drawString(fld.getColumn() + " " + fld.getRow(),
-                        offsetX - PAWN_SIZE / 3,
+                        offsetX - (PAWN_SIZE / 3),
                         offsetY);
             }
         }
