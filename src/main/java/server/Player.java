@@ -66,6 +66,7 @@ public class Player implements Runnable {
             socketOutput.println(myColor);
 
             play();
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -101,8 +102,6 @@ public class Player implements Runnable {
                         theGame.sendToAll(message);
                         System.exit(0);
                     }
-
-                    theGame.setCurrentRound(theGame.getCurrentRound().goNext());
 
                     theGame.sendToAll(message);
                 } else {
