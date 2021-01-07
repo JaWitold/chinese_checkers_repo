@@ -34,7 +34,6 @@ public class ClientGUI {
         Client gameClient = newClient;
         gameClient.run(this);
         gamePlayer = gameClient.getPlayer();
-
         gameFrame = new JFrame("Chinese Checkers");
         updateTitle();
         gameBoardGUI = new BoardGUI();
@@ -59,7 +58,6 @@ public class ClientGUI {
         gameMouseListener.setPlayer(gamePlayer);
         gameFrame.addMouseListener(gameMouseListener);
         gameFrame.add(gameBoardGUI);
-
         gameFrame.setSize(648, 517);
         gameFrame.setResizable(false);
         gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
