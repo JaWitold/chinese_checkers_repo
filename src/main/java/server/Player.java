@@ -91,6 +91,7 @@ public class Player implements Runnable {
                 System.exit(2);
             } else if (command.startsWith("MOVE:")) {
                 if (theGame.processCommand(command, myColor)) {
+                    theGame.setCurrentRound(theGame.getCurrentRound().goNext());
                     String message = command
                             + ";ROUND:"
                             + theGame.getCurrentRound().getColor();
