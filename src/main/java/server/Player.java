@@ -66,6 +66,7 @@ public class Player implements Runnable {
             socketOutput.println(myColor);
 
             play();
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
