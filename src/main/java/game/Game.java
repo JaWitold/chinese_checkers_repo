@@ -4,6 +4,7 @@ import borad.BoardInterface;
 import borad.boardBuilder.*;
 
 import borad.field.FieldInterface;
+import recordingSpring.RecordingController;
 import server.Player;
 import state.DefaultGameState;
 import state.GameStateInterface;
@@ -16,6 +17,8 @@ import java.util.List;
  * The type Game.
  */
 public class Game {
+
+    private static RecordingController RecController;
     /**
      * Number of players.
      */
@@ -54,7 +57,7 @@ public class Game {
         gameBoard = setUpBoard(numberOfPlayers);
         rulesSet = new RulesSet(gameBoard);
         System.out.println("Starting the Game");
-        //while (true) { }
+        RecController = new RecordingController(numberOfPlayers);
     }
 
     public GameStateInterface getCurrentRound() {
@@ -70,7 +73,7 @@ public class Game {
     public synchronized boolean processCommand(
             String message,
             final CustomColor playersColor) {
-        System.out.println("current round:" + currentRound.getColor());
+        //System.out.println("current round:" + currentRound.getColor());
         if (currentRound.getColor() == playersColor) {
             if (message.startsWith("MOVE:")) {
                 try {
@@ -105,6 +108,8 @@ public class Game {
                                             dColumn,
                                             dRow,
                                             gameBoard.getFields()));
+                            System.out.println("saving this move");
+                            RecController.addMoveToTheGame(sColumn, sRow, dColumn, dRow, currentRound.getColor());
                             return true;
                         }
                     }
@@ -180,4 +185,10 @@ public class Game {
     public void setCurrentRound(final GameStateInterface goNext) {
         currentRound = goNext;
     }
+
+    public void saveGame() {
+        RecController.saveGameInDatabase();
+    }
+
+
 }

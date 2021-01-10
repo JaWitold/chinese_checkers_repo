@@ -58,19 +58,18 @@ public class Player implements Runnable {
     @Override
     public void run() {
         try {
-
             socketInput = new Scanner(serverSocket.getInputStream());
             socketOutput = new PrintWriter(
                     serverSocket.getOutputStream(),
                     true);
             socketOutput.println(myColor);
-
             play();
 
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
+                theGame.saveGame();
                 theGame.sendToAll("QUIT");
                 serverSocket.close();
                 System.out.println("Player left");
@@ -100,6 +99,7 @@ public class Player implements Runnable {
                     if (theGame.processCommand("WON:", myColor)) {
                         message = "WON:" + myColor;
                         theGame.sendToAll(message);
+                        theGame.saveGame();
                         System.exit(0);
                     }
 

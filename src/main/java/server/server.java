@@ -20,7 +20,7 @@ public class server {
     /**
      * The constant colorList.
      */
-    public static final List<CustomColor> colorList = new ArrayList();
+    public static final List<CustomColor> colorList = new ArrayList<>();
 
     /**
      * The entry point of application.
@@ -33,7 +33,6 @@ public class server {
         if(args.length != 1){
             throw new Exception("No players number found. Please choose 2, 3, 4 or 6 players mode");
         }
-
 
         int[] modes = {2, 3, 4, 6};
         int mode = Integer.parseInt(args[0]);
