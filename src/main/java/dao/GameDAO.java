@@ -1,7 +1,8 @@
 package dao;
 
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
@@ -27,21 +28,32 @@ public class GameDAO {
 		session.close();
 	}
 
-	public List<Move> getMovesForGame(int id) {
+	public Set<Move> getMovesForGame(int id) {
 		
 		Session session = sessionFactory.openSession();
 		String sqlQuery = "FROM Move WHERE game=" + id;
     	    
         @SuppressWarnings("unchecked")
 		List<Move> moves = (List<Move>) session.createQuery(sqlQuery).list();
-        
         session.close();
-        
-        for (Move mvs : moves) {
-            System.out.println(mvs.getId()+" " +mvs.getFromX()+" "+mvs.getFromY() +" "+mvs.getToX()+ " "+ mvs.getToY()+ " "+mvs.getColor());
-       	}
-        return moves;
+
+		return new HashSet<>(moves);
+//        for (Move mvs : moves) {
+//            System.out.println(mvs.getId()+" " +mvs.getFromX()+" "+mvs.getFromY() +" "+mvs.getToX()+ " "+ mvs.getToY()+ " "+mvs.getColor());
+//       	}
 	}
-	
+
+	public List<Game> getGameInfo(int id) {
+
+		Session session = sessionFactory.openSession();
+		String sqlQuery = "FROM Game WHERE id=" + id;
+
+		@SuppressWarnings("unchecked")
+		List<Game> games = (List<Game>) session.createQuery(sqlQuery).list();
+
+		session.close();
+
+		return games;
+	}
 
 }

@@ -1,8 +1,6 @@
 package recordingSpring;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 import dao.GameDAO;
 import game.CustomColor;
@@ -14,8 +12,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class RecordingController {
 	final ApplicationContext appContext;
-	final Game game;
-	final Set<Move> moves;
+	Game game;
+	Set<Move> moves;
 
 //	public static void main(String[] args) {
 //		RecordingController RC = new RecordingController(3);
@@ -25,6 +23,12 @@ public class RecordingController {
 //		RC.saveGameInDatabase();
 //		RC.getGameFromDatabase(1);
 //	}
+
+	public RecordingController(){
+		appContext = new ClassPathXmlApplicationContext(
+				"config/spring-configuration.xml");
+
+	}
 
 	public RecordingController(final int players){
 		appContext = new ClassPathXmlApplicationContext(
@@ -48,8 +52,11 @@ public class RecordingController {
 		gameDAO.createGame(game);
 	}
 
-	public void getGameFromDatabase(final int id) {
+	public boolean getGameFromDatabase(final int id) {
+		game = null;
 		final GameDAO gameDAO = (GameDAO) this.appContext.getBean("gameDAO");
-		gameDAO.getMovesForGame(id);
+		moves = gameDAO.getMovesForGame(id);
+		game = gameDAO.getGameInfo(id).get(0);
+		return game != null;
 	}
 }

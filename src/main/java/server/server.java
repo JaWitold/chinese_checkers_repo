@@ -1,6 +1,7 @@
 package server;
 
 import game.*;
+import recordingSpring.RecordingController;
 
 import java.net.ServerSocket;
 import java.util.ArrayList;
@@ -30,8 +31,14 @@ public class server {
      */
     public static void main(String[] args) throws Exception {
 
-        if(args.length != 1){
-            throw new Exception("No players number found. Please choose 2, 3, 4 or 6 players mode");
+        if(args.length < 1){
+            throw new Exception("No players number found. Please choose 2, 3, 4 or 6 players mode, r [id] - for replay mode of game of given id");
+        }
+
+        try {
+        if(args[0].equals("r") && args.length >= 2) {
+           int id = Integer.parseInt(args[1]);
+           runReplay(id);
         }
 
         int[] modes = {2, 3, 4, 6};
@@ -62,5 +69,23 @@ public class server {
             }
             new Game(players);
         }
+        } catch (NumberFormatException e) {
+            System.out.println("Incorrect argument");
+        }
+    }
+
+    private static void runReplay(final int id) {
+        RecordingController RC = new RecordingController();
+        if(!RC.getGameFromDatabase(id)) {
+            System.out.println("Could not find the game of id = " + id);
+            System.exit(1);
+        }
+        System.out.println("dziala:)");
+
+        //polaczyc z 1 klientem
+
+        //w petli wyslac mu ruchy graczy
+
+
     }
 }
