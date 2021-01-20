@@ -1,14 +1,18 @@
 package server;
 
+import entities.Move;
 import game.*;
 import recordingSpring.RecordingController;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The type Server.
@@ -82,10 +86,37 @@ public class server {
         }
         System.out.println("dziala:)");
 
+        entities.Game gameInfo = RC.getGame();
+
         //polaczyc z 1 klientem
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        try (ServerSocket socket = new ServerSocket(50000)) {
+            System.out.println("Server is running at port 50000, ready to play replay");
+            while(players.size() < 1) {
+                Player tmp = new Player(socket.accept(), CustomColor.RED);
+                executorService.execute(tmp);
+                //w petli wyslac mu ruchy graczy
+                playReplay(tmp, gameInfo, RC.getMoves());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        //w petli wyslac mu ruchy graczy
+    }
 
-
+    private static void playReplay(Player tmp, entities.Game gameInfo, Set<Move> moves) {
+        //setup
+        tmp.sendMessage(gameInfo.getPlayers() + ":" + moves.iterator().next().getColor());
+        for(Move mv : moves) {
+            String msg = "MOVE:" + mv.getFromX() + "," + mv.getFromY() + "," + mv.getToX() + "," + + mv.getToY() + ";ROUND:" + mv.getColor();
+            System.out.println(msg);
+            tmp.sendMessage(msg);
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        tmp.sendMessage("QUIT");
     }
 }

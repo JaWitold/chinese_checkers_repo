@@ -69,8 +69,10 @@ public class Player implements Runnable {
             e.printStackTrace();
         } finally {
             try {
-                theGame.saveGame();
-                theGame.sendToAll("QUIT");
+                if(theGame != null) {
+                    theGame.saveGame();
+                    theGame.sendToAll("QUIT");
+                }
                 serverSocket.close();
                 System.out.println("Player left");
             } catch (IOException e) {

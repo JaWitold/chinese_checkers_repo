@@ -27,7 +27,6 @@ public class RecordingController {
 	public RecordingController(){
 		appContext = new ClassPathXmlApplicationContext(
 				"config/spring-configuration.xml");
-
 	}
 
 	public RecordingController(final int players){
@@ -58,5 +57,13 @@ public class RecordingController {
 		moves = gameDAO.getMovesForGame(id);
 		game = gameDAO.getGameInfo(id).get(0);
 		return game != null;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public Set<Move> getMoves() {
+		return moves;
 	}
 }
